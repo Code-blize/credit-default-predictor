@@ -44,4 +44,4 @@ if os.path.exists(filings_dir):
                 print(f"✓ Saved to {output_file}")
                 print(f"Preview: {text[:200]}...\n")
 else:
-    print("❌ No SEC filings found! Run 01_data_collection.py first")
+    print(" No SEC filings found! Run 01_data_collection.py first")
