@@ -1,14 +1,16 @@
-
-
-from sec_edgar_downloader import Downloader
+from edgar import Company, set_identity
 import pandas as pd
 import yfinance as yf
 import os
+from pathlib import Path  # Fixed: Uppercase P
 
-# Create data folder
-os.makedirs('data', exist_ok=True)
+# 1. AUTHENTICATION
+set_identity("Obasi-Uzoma Blessing blessingobasiuzoma@gmail.com")
 
-# Download SEC filings for 5 companies (start small!)
+# Create data folders
+os.makedirs('data/sec_filings', exist_ok=True)
+os.makedirs('data/prices', exist_ok=True)
+
 companies = {
     'AAPL': 'Apple Inc.',
     'TSLA': 'Tesla Inc.',
@@ -17,26 +19,30 @@ companies = {
     'GM': 'General Motors'
 }
 
-print("Downloading SEC 10-K filings...")
-dl = Downloader("Obasi-Uzoma Blessing", "blessingobasiuzoma@gmail.com", "data/sec_filings")
-
+print("--- Starting SEC 10-K Downloads ---")
 for ticker in companies.keys():
-    print(f"Downloading {ticker}...")
+    print(f"Downloading {ticker} filings...")
     try:
-        # Download last 2 years of 10-K filings
-        dl.get("10-K", ticker, limit=2)
-        print(f" {ticker} done")
+        # Connect to the company
+        comp = Company(ticker)
+        # Find the 10-K filings and take the latest 2
+        filings = comp.get_filings(form="10-K").latest(2)
+        
+        # Fixed: These lines MUST be indented to stay inside the 'try' block
+        save_path = Path("data/sec_filings").absolute()
+        filings.download(str(save_path))
+        print(f"   {ticker} filings saved.")
     except Exception as e:
-        print(f" {ticker} failed: {e}")
+        print(f"   {ticker} filings failed: {e}")
 
-print("\nDownloading stock price data...")
+print("\n--- Starting Stock Price Downloads ---")
 for ticker in companies.keys():
     print(f"Getting {ticker} prices...")
     try:
         stock = yf.download(ticker, start="2020-01-01", end="2024-12-31")
-        stock.to_csv(f'data/{ticker}_prices.csv')
-        print(f" {ticker} saved")
+        stock.to_csv(f'data/prices/{ticker}_prices.csv')
+        print(f"   {ticker} prices saved.")
     except Exception as e:
-        print(f" {ticker} failed: {e}")
+        print(f"   {ticker} prices failed: {e}")
 
-print("\n Data collection is complete.")
+print("\nAll tasks complete!")
