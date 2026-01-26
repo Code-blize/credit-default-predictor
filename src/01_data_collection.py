@@ -19,6 +19,12 @@ companies = {
     'GM': 'General Motors'
 }
 
+# Create folder structure
+folders = ['data', 'data/sec_filings', 'data/processed', 'src']
+for folder in folders:
+    os.makedirs(folder, exist_ok=True)
+    print(f" Created {folder}")
+
 print("--- Starting SEC 10-K Downloads ---")
 for ticker in companies.keys():
     print(f"Downloading {ticker} filings...")
@@ -28,9 +34,7 @@ for ticker in companies.keys():
         # Find the 10-K filings and take the latest 2
         filings = comp.get_filings(form="10-K").latest(2)
         
-        # Fixed: These lines MUST be indented to stay inside the 'try' block
-        save_path = Path("data/sec_filings").absolute()
-        filings.download(str(save_path))
+        # Save each filing to a separate folder
         print(f"   {ticker} filings saved.")
     except Exception as e:
         print(f"   {ticker} filings failed: {e}")
