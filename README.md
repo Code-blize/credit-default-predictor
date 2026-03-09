@@ -1,25 +1,76 @@
+# Credit Default Predictor
+
+A multimodal machine learning project for predicting credit default using financial data and text-based features.
+
+## Overview
+
+This project explores credit default prediction by combining structured financial data with text-based information to build predictive models. It includes data exploration, cleaning, feature engineering, baseline modeling, and deep learning experiments using an LSTM-based approach.
+
+The goal is to understand how multiple data sources can improve credit risk prediction and support better decision-making in financial analytics.
+
+## Project Objectives
+
+- Explore patterns in credit default data
+- Clean and prepare structured and text-based features
+- Engineer features for predictive modeling
+- Build a baseline machine learning model
+- Experiment with an LSTM-based deep learning model
+- Compare approaches for credit default prediction
+
+## Tools and Technologies
+
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Jupyter Notebook
+- PyTorch or TensorFlow
+- LSTM
+- FinBERT
+- Git/GitHub
+
+## Project Workflow
+
+### 1. Data Exploration
+Understand the dataset structure, variable types, missing values, and early patterns related to default behavior.
+
+### 2. Data Cleaning
+Prepare the dataset by handling missing values, fixing inconsistencies, and creating analysis-ready data.
+
+### 3. Feature Engineering
+Create useful structured and text-based features for modeling.
+
+### 4. Baseline Model
+Build a simple machine learning baseline to establish initial predictive performance.
+
+### 5. Deep Learning Model
+Train an LSTM-based model to capture deeper patterns in the data and compare performance against the baseline.
+
+## Repository Structure
+
+```text
 credit_default_project/
 │
-├── 📓 notebooks/                    ← Your Jupyter notebooks go here
-│   ├── 01_data_exploration.ipynb   ← Day 1: Explore data
-│   ├── 02_data_cleaning.ipynb      ← Day 2: Clean data  
-│   ├── 03_feature_engineering.ipynb ← Day 3-4: Create features
-│   ├── 04_baseline_model.ipynb     ← Day 5: Simple model
-│   └── 05_lstm_model.ipynb         ← Day 6-7: Deep learning
+├── notebooks/
+│   ├── 01_data_exploration.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   ├── 03_feature_engineering.ipynb
+│   ├── 04_baseline_model.ipynb
+│   └── 05_lstm_model.ipynb
 │
-├── 📊 data/
-│   ├── raw/                        ← Original downloaded data (DON'T EDIT)
-│   ├── processed/                  ← Cleaned data (from notebook 02)
-│   └── features/                   ← Feature files (from notebook 03)
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── features/
 │
-├── 🐍 src/                          ← Python modules (reusable code)
-│   ├── data_collection.py          ← Functions to download data
-│   ├── feature_engineering.py      ← Functions to create features
-│   └── models.py                   ← Model architectures
+├── src/
+│   ├── data_collection.py
+│   ├── feature_engineering.py
+│   └── models.py
 │
-├── 📤 outputs/
-│   ├── models/                     ← Saved trained models (.pkl, .pth)
-│   ├── visualizations/             ← Plots and charts (.png)
-│   └── reports/                    ← Text summaries
+├── outputs/
+│   ├── models/
+│   ├── visualizations/
+│   └── reports/
 │
-└── 📝 README.md                     ← Project documentation
+└── README.md
